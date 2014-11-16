@@ -1,0 +1,29 @@
+---
+- name: install libselinux-python
+  yum: pkg=libselinux-python state=latest
+
+- name: Disable yum-fastestmirror-plugin
+  copy: src=etc/yum/pluginconf.d/fastestmirror.conf dest=/etc/yum/pluginconf.d/fastestmirror.conf
+
+- name: ensure ntpd is at the latest version
+  yum: pkg=ntp state=latest
+  notify:
+    - restart ntpd
+
+- name: Import EPEL and Remi GPG keys
+  rpm_key: key={{ item }} state=present
+  with_items:
+    - "https://fedoraproject.org/static/0608B895.txt"
+    - "http://rpms.famillecollet.com/RPM-GPG-KEY-remi"
+
+- name: Install EPEL and Remi repos
+  command: rpm -Uvh --force {{ item.href }} creates={{ item.creates }}
+  with_items:
+  - { 
+    href: "http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm",
+    creates: "/etc/yum.repos.d/epel.repo"
+  }
+  - {
+    href: "http://rpms.famillecollet.com/enterprise/remi-release-6.rpm",
+    creates: "/etc/yum.repos.d/remi.repo"
+  }

@@ -1,0 +1,46 @@
+# Directory where the Elasticsearch binary distribution resides
+ES_HOME={{ es_home }}
+
+# Heap Size (defaults to 256m min, 1g max)
+ES_HEAP_SIZE={{ es_heap_size }}
+
+# Heap new generation
+#ES_HEAP_NEWSIZE=
+
+# max direct memory
+#ES_DIRECT_SIZE=
+
+# Additional Java OPTS
+ES_JAVA_OPTS="{{ es_java_opts }}"
+
+# Maximum number of open files
+MAX_OPEN_FILES={{ max_open_files }}
+
+# Maximum amount of locked memory
+#MAX_LOCKED_MEMORY=
+
+# Maximum number of VMA (Virtual Memory Areas) a process can own
+MAX_MAP_COUNT={{ max_map_count }}
+
+# Elasticsearch log directory
+LOG_DIR={{ log_dir }}
+
+# Elasticsearch data directory
+DATA_DIR={{ data_dir }}
+
+# Elasticsearch work directory
+WORK_DIR={{ work_dir }}
+
+# Elasticsearch conf directory
+CONF_DIR={{ conf_dir }}
+
+# Elasticsearch configuration file (elasticsearch.yml)
+CONF_FILE={{ conf_file }}
+
+# User to run as, change this to a specific elasticsearch user if possible
+# Also make sure, this user can write into the log directories in case you change them
+# This setting only works for the init script, but has to be configured separately for systemd startup
+ES_USER={{ es_user }}
+
+# Configure restart on package upgrade (true, every other setting will lead to not restarting)
+#RESTART_ON_UPGRADE=true

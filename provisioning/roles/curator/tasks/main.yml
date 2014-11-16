@@ -1,0 +1,12 @@
+---
+- name: Install Git
+  yum: name=git state=latest
+
+- name: Checkout Elasticesearch-Curator
+  git: repo=https://github.com/elasticsearch/curator.git dest=/tmp/curator
+
+- name: Install python-pip
+  yum: name=python-pip state=latest
+
+- name: Execute pip-install
+  command: pip install elasticsearch-curator chdir=/tmp/curator creates=/usr/bin/curator 

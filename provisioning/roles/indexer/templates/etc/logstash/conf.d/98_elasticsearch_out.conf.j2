@@ -1,0 +1,9 @@
+output {
+  elasticsearch {
+    action => "index"
+    cluster => "{{ es_clustername }}"
+    index => "logstash-%{+YYYY.MM.dd}"
+    protocol => "http"
+    host => "{{ es_address }}"
+  }
+}

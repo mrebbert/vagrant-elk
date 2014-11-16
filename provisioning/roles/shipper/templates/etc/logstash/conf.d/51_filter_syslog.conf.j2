@@ -1,0 +1,11 @@
+filter {
+  if [type] == "syslog" {
+    grok {
+      match => [ "message", "%{SYSLOGBASE2}"] 
+    }
+    date {
+      match => [ "timestamp", "MMM dd HH:mm:ss" ]
+      remove_field => [ "timestamp" ]
+    } 
+  }
+}

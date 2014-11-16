@@ -1,0 +1,12 @@
+---
+- name: set permissions for messages-log
+  file: path=/var/log/messages mode=644
+  notify: restart logstash
+
+- name: Copy logstash configuration files
+  template: src=etc/logstash/conf.d/{{ item.src }} dest=/etc/logstash/conf.d/{{ item.dest }} owner=root group=root mode=0644
+  with_items:
+    - { src: '01_input_syslog.conf.j2', dest: '01_input_syslog.conf' }
+    - { src: '51_filter_syslog.conf.j2', dest: '51_filter_syslog.conf' }
+    - { src: '99_output_redis.conf.j2', dest: '99_output_redis.conf' }
+  notify: restart logstash

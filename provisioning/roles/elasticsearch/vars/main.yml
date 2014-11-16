@@ -1,0 +1,18 @@
+---
+es_home: "/usr/share/elasticsearch"
+es_heap_size: "512m"
+es_java_opts: "-Des.index.storage.type=memory"
+max_open_files: 65535
+max_map_count: 262144
+log_dir: "/var/log/elasticsearch"
+data_dir: "/var/lib/elasticsearch"
+work_dir: "/tmp/elasticsearch"
+conf_dir: "/etc/elasticsearch"
+conf_file: "/etc/elasticsearch/elasticsearch.yml"
+es_user: "elasticsearch"
+
+cluster_name: '{{ elasticsearch_clustername | default("logstash") }}'
+node_name: "{{ elasticsearch_nodename | default(ansible_fqdn) }}"
+network_host: "{{ elasticsearch_bind_address | default(ansible_eth1.ipv4.address) }}"
+http_allow_origin: "{{ kibana_host | default(ansible_eth1.ipv4.address) }}" 
+

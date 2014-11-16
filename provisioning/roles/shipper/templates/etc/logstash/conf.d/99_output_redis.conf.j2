@@ -1,0 +1,8 @@
+output {
+  redis {
+    host => ["{{ redis_bind_address }}:{{ redis_port }}"]
+    shuffle_hosts => true
+    data_type => "list"
+    key => "logstash"
+  }
+}

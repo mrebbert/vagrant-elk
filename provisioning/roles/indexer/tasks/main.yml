@@ -1,0 +1,8 @@
+---
+- name: Copy Indexer configuration
+  template: src=etc/logstash/conf.d/{{ item.src }} dest=/etc/logstash/conf.d/{{ item.dest }}
+  with_items:
+  - { src: "01_redis_in.conf.j2", dest: "01_redis_in.conf" }
+  - { src: "98_elasticsearch_out.conf.j2", dest: "98_elasticsearch_out.conf" }
+  notify:
+  - restart logstash

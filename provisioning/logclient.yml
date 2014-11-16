@@ -1,0 +1,4 @@
+---
+- hosts: logclient
+  roles:
+    - shipper

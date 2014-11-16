@@ -1,0 +1,25 @@
+---
+- name: Install RPM-Key for elasticsearch
+  rpm_key: state=present key=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+- name: elasticsearch-repo install
+  copy: src=elasticsearch.repo
+        dest=/etc/yum.repos.d/
+        owner=root group=root mode=0644
+
+- name: ensure elasticsearch is at the latest version
+  yum: pkg=elasticsearch state=latest
+  notify:
+    - restart elasticsearch
+
+- name: copy sysconfig file
+  template: >
+    src=etc/sysconfig/elasticsearch.j2 dest=/etc/sysconfig/elasticsearch
+  notify: 
+    - restart elasticsearch
+
+- name: copy elasticsearch configuration
+  template: >
+    src=etc/elasticsearch/elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+  notify: 
+    - restart elasticsearch

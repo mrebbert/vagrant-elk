@@ -1,0 +1,8 @@
+---
+elasticsearch_clustername: "logstash"
+elasticsearch_bind_address: "{{ ansible_eth1.ipv4.address }}"
+elasticsearch_http_port: 9200
+kibana_host: "{{ ansible_eth1.ipv4.address }}"
+http_ssl_bind_address: "{{ ansible_eth1.ipv4.address }}"
+redis_bind_address: "192.168.2.120"
+redis_port: 6379

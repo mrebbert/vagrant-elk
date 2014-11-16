@@ -1,0 +1,5 @@
+---
+rs_port: "{{ redis_port | default(6379) }}"
+rs_address: "{{ redis_bind_address | default(ansible_eth1.ipv4.address) }}"
+es_clustername: '{{ elasticsearch_clustername | default("logstash")  }}'
+es_address: "{{elasticsearch_bind_address | default(ansible_eth1.ipv4.address) }}"

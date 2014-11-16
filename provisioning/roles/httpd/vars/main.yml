@@ -1,0 +1,5 @@
+---
+server_admin_address: "webmaster@yourdomain.com"
+ssl_bind_address: "{{ http_ssl_bind_address | default(ansible_eth1.ipv4.address) }}"
+es_bind_address: "{{ elasticsearch_bind_address | default(ansible_eth1.ipv4.address) }}"
+es_http_port: "{{ elasticsearch_http_port | default(9200) }}"

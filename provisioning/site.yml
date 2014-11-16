@@ -1,0 +1,3 @@
+---
+- include: logserver.yml
+- include: logclient.yml

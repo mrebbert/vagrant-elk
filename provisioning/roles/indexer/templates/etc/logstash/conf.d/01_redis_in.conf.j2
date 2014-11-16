@@ -1,0 +1,8 @@
+input {
+  redis {
+    host => "{{ rs_address }}"
+    port => {{ rs_port }}
+    data_type => "list"
+    key => "logstash"
+  }
+}

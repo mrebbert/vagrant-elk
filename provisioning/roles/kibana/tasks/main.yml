@@ -1,0 +1,26 @@
+---
+
+- name: Download Kibana
+  get_url: url=https://download.elasticsearch.org/kibana/kibana/kibana-3.1.2.tar.gz dest=/tmp/
+
+- name: Untar Kibana
+  unarchive: src=/tmp/kibana-3.1.2.tar.gz dest=/var/www/ copy=no owner=root group=root
+
+- name: Create link for Kibana
+  file: path=/var/www/kibana src=/var/www/kibana-3.1.2 state=link
+
+- name: Copy virtual host configuration for Kibana
+  template: src=etc/httpd/conf.d/{{ item.src }} dest=/etc/httpd/conf.d/{{ item.dest }} owner=root group=root mode=0644
+  with_items:
+  - { src: "kibana.conf.j2", dest: "kibana.conf" }
+  - { src: "kibana_ssl.conf.j2", dest: "kibana_ssl.conf" }
+  notify:
+  - restart httpd
+
+- name: Create htpasswd
+  command: htpasswd -b -c /etc/httpd/conf.d/kibana-htpasswd logger logger creates=/etc/httpd/conf.d/kibana-htpasswd
+  notify:
+  - restart httpd 
+
+- name: Copy Kibana configuration
+  copy: src=var/www/kibana/config.js dest=/var/www/kibana/config.js

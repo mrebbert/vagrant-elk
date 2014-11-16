@@ -1,0 +1,10 @@
+---
+- name: Ensure redis is at the latest version
+  yum: pkg=redis state=latest enablerepo=remi
+  notify:
+    - restart redis
+
+- name: Copy configuration file
+  template: src=etc/redis.conf.j2 dest=/etc/redis.conf
+  notify:
+    - restart redis

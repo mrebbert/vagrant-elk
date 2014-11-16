@@ -1,0 +1,7 @@
+---
+- hosts: logserver
+  roles:
+    - store
+    - indexer
+    - queue
+    - kibana
