@@ -5,7 +5,7 @@ A Vagrant-based Environment for Logstash, Elasticsearch, Redis and Kibana with A
 
 ## Description
 
-The primary goal of this smart project is to verify the configuration of the setup based on Logstash, Redis, Elasticsearch and Kibana as frontend and to get an enviroment to verify new logstash configurations for logfile parsings in nearly production enviroments.
+The primary goal of this smart project is to verify the configuration of a loganalytic environment based on the popular Elasticsearch ELK Stack (Elasticsearch, Logstash, Kibana as frontend and Redis) and to get an enviroment to verify new logstash configurations for logfile parsings in nearly production enviroments.
 The project includes a box (named as log-client) which act as a typical log client. Therein it has a logstash installed which act as log parser and shipper. Therfor it parses (actually only) /var/log/messages and transfers the log statements to the Redis instance on the logserver which is the log queue.
 
 The second box (named as log-server) includes the redis installation as queue, a logstash instance as indexer, an elasticsearch instance and a kibana installation served by an apache webserver as frontend.
