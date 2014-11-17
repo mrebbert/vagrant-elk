@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # Use VBoxManage to customize the VM
         vb.customize ["modifyvm", :id, "--cpus", opts[:cpus] ] if opts[:cpus]
         vb.customize ["modifyvm", :id, "--memory", opts[:mem] ] if opts[:mem]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
       end
       config.vm.provision "ansible" do |ansible|
         ansible.sudo=true
